@@ -42,7 +42,10 @@
                       ></v-text-field>
                     </v-list-item>
                     <v-list-item class="list">
+                      <!-- <div
+                      class="input group " style="background-color:#F3F3F3;color:rgb(111,111,111);text-align: center; width:10vw ; height: 38px;">组别</div> -->
                       <v-select
+                        placeholder="组别"
                         label="组别"
                         :items="groups"
                         :rules="groupRules"
@@ -119,7 +122,7 @@
                         placeholder="QQ"
                         single-line
                         solo
-                        flat
+                        flat 
                         background-color="#F3F3F3"
                         dense
                         class="input"
@@ -163,10 +166,12 @@
                   </v-list>
                 </div>
                 <div class="sign-up_right">
+                  <!-- <img src="~assets/img/home/Ellipse 2.png" alt="" srcset="" /> -->
                   <v-file-input
                     :label="
                       $vuetify.breakpoint.xs ? '简历' : '点击此处上传简历'
                     "
+                    
                     solo
                     flat
                     background-color="#F3F3F3"
@@ -176,7 +181,9 @@
                     color="rgb(111,111,111)"
                     prepend-icon=""
                     class="file-input"
-                  ></v-file-input>
+                  >
+                 
+                </v-file-input>
                   <v-file-input
                     :label="
                       $vuetify.breakpoint.xs
@@ -282,9 +289,25 @@ export default {
       resume: null,
       work: null,
       sex: "",
+      dropActive:false
+     
     };
   },
   methods: {
+
+    //获取拖拽文件
+        dropEvent(e,index){
+         this.dropActive=false;
+         e.stopPropagation();
+         e.preventDefault();
+         //this.uploadFile(e);
+         if(index==0) {
+          this.resume=e.dataTransfer.files[0];
+         }else if(index==1) {
+          this.work=e.dataTransfer.files[0];        
+        }
+          console.log(e.dataTransfer.files)
+        },
     gotoRegister() {
       let distance = document.querySelector(".register").offsetTop + 69;
       window.scrollTo({
@@ -332,7 +355,9 @@ export default {
           // 填写Bucket名称。
           bucket: 'pivotstudio'
         });
+
         const rel = this.resume.name.split(".");
+
         const rekey =
           new Date().getTime().toString() +
           this.phone +
@@ -428,7 +453,84 @@ export default {
       }
     },
   },
+  mounted(){
+  // window.addEventListener('scroll', this.wheelFn, { passive: false })
+   //简历和作品拖到上传
+    let dropAreas= document.getElementsByClassName('file-input');
+    dropAreas.forEach((dropArea, index)=>{
+      console.log(dropArea);
+	    dropArea.addEventListener('drop', e=>this.dropEvent(e,index), false)
+	    dropArea.addEventListener('dragleave', (e) => {
+	      e.stopPropagation()
+	      e.preventDefault()
+	      this.dropActive = false
+	    })
+	    dropArea.addEventListener('dragenter', (e) => {
+	      e.stopPropagation()
+	      e.preventDefault()
+	      this.dropActive = true
+	    })
+	    dropArea.addEventListener('dragover', (e) => {
+	      e.stopPropagation()
+	      e.preventDefault()
+	      this.dropActive = true
+	    })
+    })   
+     
+  },
   created: () => {
+    //let state=[0,1.0,1.8];
+      
+  const  easeInOutCubic =(x)=>{
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+}
+
+      let oldScrollStep=0;
+    //滚动动画函数
+  const wheelFn =(e,disable)=> {
+    console.log(window.innerHeight)
+    console.log(e);
+  const nowY = document.documentElement.scrollTop;
+  console.log(nowY);
+
+  // const { index, between } = calcNowPosition(nowY)
+  // console.log(index, between);
+  // 滚轮是向下还是向上
+  const down =  nowY-oldScrollStep;
+  oldScrollStep=nowY;
+  //this.state.debounce = true
+  let start = 0
+  let scrollHeight = 0
+  if(!disable){
+  if (down>0) {
+    // 向下滚，滚动高度等于下一个位置与现在的差值
+    scrollHeight = window.innerHeight;
+
+  } else {
+    // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
+    scrollHeight =0
+  }
+  window.scrollTo({top:scrollHeight,behavior:'smooth'
+  });
+  console.log('move', scrollHeight)
+  // 动画函数，需要闭包访问 start 就没有分离出来
+  // const step = (unix) => {
+  //   if (!start) {
+  //     start = unix
+  //   }
+  //   const duration = unix - start
+  //   const y = easeInOutCubic(duration / 1000) * scrollHeight
+  //   window.scrollTo(0, down ? nowY + y : nowY - y)
+  //   if (duration <= 1001) {
+  //     requestAnimationFrame(step)
+  //   } else {
+  //     //this.state.debounce = false
+  //   }
+  // }
+  // requestAnimationFrame(step)
+}
+}
+
     const isElementInViewport = (el) => {
       // Special bonus for those using jQuery
       if (typeof jQuery === "function" && el instanceof jQuery) {
@@ -451,10 +553,17 @@ export default {
     };
     var lastScrollTop = 0;
     var disable = false;
+    //let disables=false;
     var disableup = false;
-    window.addEventListener("scroll", (e) => {
+     window.addEventListener("scroll", (e) => {
       try {
         var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
+        //wheelFn(e,disables);
+        // disables=true;
+        // setTimeout(() => {
+        //       disable = false;
+        //     }, 1000);
+       console.log(st);
         if (st > lastScrollTop) {
           // downscroll code
           if (
@@ -473,16 +582,16 @@ export default {
           }
         } else {
           //   // upscroll code
-          // if (!disableup&&!isElementInViewport(document.getElementById('join'))) {
-          //   disableup = true;
-          //   window.scrollTo({
-          //     top: 0,
-          //     behavior: 'smooth'
-          //   })
-          //   setTimeout(()=>{
-          //     disableup = false;
-          //   },1000)
-          // }
+          if (!disableup&&!isElementInViewport(document.getElementById('join'))) {
+            disableup = true;
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            })
+            setTimeout(()=>{
+              disableup = false;
+            },1000)
+        }
         }
         lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
       } catch (error) {}
@@ -502,6 +611,12 @@ export default {
   font-size: 14px;
   line-height: 12px;
   color: #2c2c2c;
+}
+::v-deep div.file-input>div.v-input__control>div.v-input__slot > div.v-text-field__slot>label {
+  /* font-size: 12px; */
+  width: 100%;
+ margin-top:20px ;
+ text-align: center!important;
 }
 ::v-deep .v-messages__message {
   line-height: 14px !important;
