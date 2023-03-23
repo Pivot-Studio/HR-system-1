@@ -553,7 +553,6 @@ export default {
     };
     var lastScrollTop = 0;
     var disable = false;
-    //let disables=false;
     var disableup = false;
      window.addEventListener("scroll", (e) => {
       try {
@@ -563,37 +562,46 @@ export default {
         // setTimeout(() => {
         //       disable = false;
         //     }, 1000);
-       console.log(st);
+       console.log(1,st);
+       console.log(2,lastScrollTop)
         if (st > lastScrollTop) {
-          // downscroll code
+          console.log(3);
           if (
             !disable &&
             isElementInViewport(document.getElementById("join"))
           ) {
             disable = true;
+            disableup=true;
             let distance = document.querySelector(".register").offsetTop + 69;
             window.scrollTo({
               top: distance,
               behavior: "smooth",
             });
+            lastScrollTop=window.innerHeight;
             setTimeout(() => {
               disable = false;
-            }, 1000);
+              disableup= false;
+            }, 800);
+             
           }
         } else {
           //   // upscroll code
           if (!disableup&&!isElementInViewport(document.getElementById('join'))) {
             disableup = true;
+            disable=true;
             window.scrollTo({
               top: 0,
               behavior: 'smooth'
             })
+            lastScrollTop=0;
             setTimeout(()=>{
               disableup = false;
-            },1000)
+              disable=false;
+            },800)
+        
         }
-        }
-        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+        //lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+      }
       } catch (error) {}
     });
   },
