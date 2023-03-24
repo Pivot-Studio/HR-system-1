@@ -167,6 +167,7 @@
                 </div>
                 <div class="sign-up_right">
                   <!-- <img src="~assets/img/home/Ellipse 2.png" alt="" srcset="" /> -->
+                  <!-- <label><img src="~assets/img/home/Ellipse 2.png" alt="" srcset="" /> </label> -->
                   <v-file-input
                     :label="
                       $vuetify.breakpoint.xs ? '简历' : '点击此处上传简历'
@@ -184,6 +185,7 @@
                   >
                  
                 </v-file-input>
+                <!-- <label><img src="~assets/img/home/Ellipse 2.png" alt="" srcset="" /> </label> -->
                   <v-file-input
                     :label="
                       $vuetify.breakpoint.xs
@@ -289,12 +291,78 @@ export default {
       resume: null,
       work: null,
       sex: "",
-      dropActive:false
+      dropActive:false,
+      startY:0,
+      state :{
+  /** 各模块边界位置，单位为vh，mounted 时根据视窗转化为对应 px */
+   position: [0, 1, 1.8],
+   debounce: false
+            }
      
     };
   },
   methods: {
+    /** 计算现在在哪个位置，是正好对准边界还是夹在中间 */
+calcNowPosition (nowY){
+  for (let i = 0; i < this.state.position.length; i++) {
+    if (this.state.position[i] > nowY) {
+      return { index: i - 1, between: this.state.position[i - 1] !== nowY }
+    }
+  }
+  return { index: this.state.position.length - 1, between: false }
+},
 
+/** 缓动函数 https://easings.net#easeInOutCubic */
+ easeInOutCubic (x){
+  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
+},
+
+ wheelFn (e) {
+  let down;
+  console.log(e.type);
+  e.preventDefault()
+  if(e.type =='mousewheel'){
+    down = e.deltaY > 0
+  }else if(e.type =='touchmove'){
+    console.log(e.touches[0].pageY);
+    console.log(this.startY);
+    down=e.touches[0].pageY-this.startY<0;
+  }
+  const nowY = window.scrollY
+  // 正在滚动中
+  if (this.state.debounce) {
+    return
+  }
+  const { index, between } = this.calcNowPosition(nowY)
+  // 滚轮是向下还是向上
+
+  this.state.debounce = true
+  let start = 0
+  let scrollHeight = 0
+  if (down) {
+    // 向下滚，滚动高度等于下一个位置与现在的差值
+    scrollHeight = this.state.position[index + 1] - nowY
+  } else {
+    // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
+    scrollHeight = between ? (nowY - this.state.position[index]) : (this.state.position[index] - this.state.position[index - 1])
+  }
+  console.log('move', scrollHeight)
+  // 动画函数，需要闭包访问 start 就没有分离出来
+  const step = (unix) => {
+    if (!start) {
+      start = unix
+    }
+    const duration = unix - start
+    const y = this.easeInOutCubic(duration / 1000) * scrollHeight
+    window.scrollTo(0, down ? nowY + y : nowY - y)
+    if (duration <= 1001) {
+      requestAnimationFrame(step)
+    } else {
+      this.state.debounce = false
+    }
+  }
+  requestAnimationFrame(step)
+},
     //获取拖拽文件
         dropEvent(e,index){
          this.dropActive=false;
@@ -454,7 +522,12 @@ export default {
     },
   },
   mounted(){
-  // window.addEventListener('scroll', this.wheelFn, { passive: false })
+    const windowHeight = window.innerHeight || document.body.clientHeight
+  // 根据vh转化为px
+  this.state.position = this.state.position.map(ele => Math.ceil(windowHeight * ele))
+  window.addEventListener('mousewheel', this.wheelFn, { passive: false })
+  window.addEventListener('touchstart', e=>{this.startY=e.touches[0].pageY})
+  window.addEventListener('touchmove',this.wheelFn, { passive: false })
    //简历和作品拖到上传
     let dropAreas= document.getElementsByClassName('file-input');
     dropAreas.forEach((dropArea, index)=>{
@@ -479,57 +552,6 @@ export default {
      
   },
   created: () => {
-    //let state=[0,1.0,1.8];
-      
-  const  easeInOutCubic =(x)=>{
-  return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2
-}
-
-      let oldScrollStep=0;
-    //滚动动画函数
-  const wheelFn =(e,disable)=> {
-    console.log(window.innerHeight)
-    console.log(e);
-  const nowY = document.documentElement.scrollTop;
-  console.log(nowY);
-
-  // const { index, between } = calcNowPosition(nowY)
-  // console.log(index, between);
-  // 滚轮是向下还是向上
-  const down =  nowY-oldScrollStep;
-  oldScrollStep=nowY;
-  //this.state.debounce = true
-  let start = 0
-  let scrollHeight = 0
-  if(!disable){
-  if (down>0) {
-    // 向下滚，滚动高度等于下一个位置与现在的差值
-    scrollHeight = window.innerHeight;
-
-  } else {
-    // 向上滚，夹在中间需滚动上一个边界与现在的差值，在边界就滚动一个完整距离
-    scrollHeight =0
-  }
-  window.scrollTo({top:scrollHeight,behavior:'smooth'
-  });
-  console.log('move', scrollHeight)
-  // 动画函数，需要闭包访问 start 就没有分离出来
-  // const step = (unix) => {
-  //   if (!start) {
-  //     start = unix
-  //   }
-  //   const duration = unix - start
-  //   const y = easeInOutCubic(duration / 1000) * scrollHeight
-  //   window.scrollTo(0, down ? nowY + y : nowY - y)
-  //   if (duration <= 1001) {
-  //     requestAnimationFrame(step)
-  //   } else {
-  //     //this.state.debounce = false
-  //   }
-  // }
-  // requestAnimationFrame(step)
-}
-}
 
     const isElementInViewport = (el) => {
       // Special bonus for those using jQuery
@@ -556,16 +578,15 @@ export default {
     var disableup = false;
      window.addEventListener("scroll", (e) => {
       try {
+        // e.defaultPrevented();
         var st = window.pageYOffset || document.documentElement.scrollTop; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
         //wheelFn(e,disables);
         // disables=true;
         // setTimeout(() => {
         //       disable = false;
         //     }, 1000);
-       console.log(1,st);
-       console.log(2,lastScrollTop)
+  
         if (st > lastScrollTop) {
-          console.log(3);
           if (
             !disable &&
             isElementInViewport(document.getElementById("join"))
@@ -577,30 +598,31 @@ export default {
               top: distance,
               behavior: "smooth",
             });
-            lastScrollTop=window.innerHeight;
+            //e.defaultPrevented();
+        
             setTimeout(() => {
               disable = false;
               disableup= false;
-            }, 800);
+            }, 1000);
              
           }
         } else {
-          //   // upscroll code
-          if (!disableup&&!isElementInViewport(document.getElementById('join'))) {
-            disableup = true;
-            disable=true;
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            })
-            lastScrollTop=0;
-            setTimeout(()=>{
-              disableup = false;
-              disable=false;
-            },800)
+          // //   // upscroll code
+          // if (!disableup&&!isElementInViewport(document.getElementById('join'))) {
+          //   disableup = true;
+          //   disable=true;
+          //   window.scrollTo({
+          //     top: 0,
+          //     behavior: 'smooth'
+          //   })
+          //   lastScrollTop=0;
+          //   setTimeout(()=>{
+          //     disableup = false;
+          //     disable=false;
+          //   },800)
         
-        }
-        //lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+        // }
+        lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
       }
       } catch (error) {}
     });
@@ -622,9 +644,25 @@ export default {
 }
 ::v-deep div.file-input>div.v-input__control>div.v-input__slot > div.v-text-field__slot>label {
   /* font-size: 12px; */
+  overflow: visible;
   width: 100%;
- margin-top:20px ;
+  height: 100%;
+ margin-top:35px ;
+ margin-left:2vw ;
  text-align: center!important;
+}
+::v-deep div.file-input>div.v-input__control>div.v-input__slot > div.v-text-field__slot>label::before{
+  display: inline-block;
+  content: "";
+   position: absolute;
+  /* left: 50%; */
+  top: -38%;
+  right: 13vw; 
+  /* margin-bottom: 20px; */
+  /* display: block; */
+  width:51px;
+  height: 51px;
+  background: url("../assets/img/home/Ellipse 2.png");
 }
 ::v-deep .v-messages__message {
   line-height: 14px !important;

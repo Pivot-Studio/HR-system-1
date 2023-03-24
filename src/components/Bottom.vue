@@ -8,9 +8,17 @@
             width="94"
             
             />
+            <div class="footer_messages">
             <p class="footer_message">© 2021 Pivot Studio |
               <a href="https://beian.miit.gov.cn/" class="beian">蜀ICP备2020029188号-1</a>
             </p>
+            <p class="footer_message">© husthole.com|
+              <a href="https://beian.miit.gov.cn/" class="beian">蜀ICP备2020029188号-2</a>
+            </p>
+            <p class="footer_message">© 2021 hustport.com |
+              <a href="https://beian.miit.gov.cn/" class="beian">蜀ICP备2020029188号-3</a>
+            </p>
+            </div>
             <div class="footer_contact">
               <strong><p>联系我们</p></strong>
               <p><img src="~assets/img/bottom/letter.png" alt="" srcset=""> Email: team@pivotstudio.cn</p>
@@ -36,10 +44,17 @@ export default {
     left: 32px;
     top: 34px;    
   }
+  .footer_messages{
+  padding-top: 60px;
+  }
   .footer_message {
-    position: absolute;
-    left: 34px;
-    top: 90px;
+    /* margin-top:20px; */
+    /* padding-top:0 ; */
+    margin-bottom: 0;
+    position: relative;
+    /* position: absolute; */
+    /* left: 34px;
+    top: 90px; */
     color: #fff;
     font-family: Segoe UI;
     font-style: normal;
