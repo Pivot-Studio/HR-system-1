@@ -657,7 +657,7 @@ calcNowPosition (nowY){
    position: absolute;
   /* left: 50%; */
   top: -38%;
-  right: 13vw; 
+  right: 23vw; 
   /* margin-bottom: 20px; */
   /* display: block; */
   width:51px;
@@ -850,6 +850,9 @@ calcNowPosition (nowY){
   margin-left: 15px;
 }
 @media screen and (max-width: 767px) {
+  ::v-deep div.file-input>div.v-input__control>div.v-input__slot > div.v-text-field__slot>label::before{
+  right: 25%;
+  }
   .sign-up_left {
     width: 50%;
   }
