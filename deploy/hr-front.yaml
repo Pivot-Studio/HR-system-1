@@ -38,7 +38,7 @@ spec:
     spec:
       priorityClassName: high-priority
       containers:
-      - image: registry.cn-hangzhou.aliyuncs.com/pivotstudio/pivothr-front:latest
+      - image:  harbor.pivotstudio.cn/pivothr/hrfront:{{.build_tag}}
         name: hr-front
         ports:
           - containerPort: 8110
@@ -52,7 +52,7 @@ spec:
       restartPolicy: Always
 status: {}
 ---
-apiVersion: autoscaling/v2beta2
+apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: hr-front
@@ -70,6 +70,6 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 60
+        averageUtilization: 70
 
 
