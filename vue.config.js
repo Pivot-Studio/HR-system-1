@@ -5,13 +5,13 @@ module.exports = {
   ],
   configureWebpack: {
     resolve: {
-        alias: {
-            'assets': '@/assets',
-            'common': '@/common',
-            'components': '@/components',
-            'network': '@/network',
-            'views': '@/views',
-        }
+      alias: {
+        'assets': '@/assets',
+        'common': '@/common',
+        'components': '@/components',
+        'network': '@/network',
+        'views': '@/views',
+      }
     },
     output: {
       filename: `[name].${process.env.VUE_APP_Version}.${Timestamp}.js`,
@@ -26,7 +26,7 @@ module.exports = {
       '/api': {
         // 要访问的跨域的域名
         // target: 'https://www.pivotstudio.cn/', //'http://localhost:5001',
-          target: "http://localhost:8888",
+        target: "https://www.pivotstudio.cn/",
         // target: 'https://limfx.pro',
         ws: true, // 是否启用websockets
         pathRewrite: {
@@ -37,6 +37,7 @@ module.exports = {
         // changOrigin: true,
         cookieDomainRewrite: "localhost"
       },
+
     }
   },
 }

@@ -26,181 +26,55 @@
                 <div class="sign-up_left">
                   <v-list>
                     <v-list-item class="list list-firstline">
-                      <v-text-field
-                        v-model="name"
-                        :rules="nameRules"
-                        label="姓名"
-                        placeholder="姓名"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input list-firstline-item"
-                        clearable
-                        color="rgb(111,111,111)"
-                      ></v-text-field>
+                      <v-text-field v-model="name" :rules="nameRules" label="姓名" placeholder="姓名" single-line solo flat
+                        background-color="#F3F3F3" dense class="input list-firstline-item" clearable
+                        color="rgb(111,111,111)"></v-text-field>
                     </v-list-item>
                     <v-list-item class="list">
-                      <v-select
-                        label="组别"
-                        :items="groups"
-                        :rules="groupRules"
-                        item-text="name"
-                        item-value="index"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input group"
-                        v-model="group"
-                        color="rgb(111,111,111)"
-                      ></v-select>
+                      <v-select label="组别" :items="groups" :rules="groupRules" item-text="name" item-value="index"
+                        single-line solo flat background-color="#F3F3F3" dense class="input group" v-model="group"
+                        color="rgb(111,111,111)"></v-select>
                       <!-- <div class="sex-tip">性别</div> -->
-                      <v-radio-group
-                        v-model="sex"
-                        row
-                        class="sex list-firstline-item"
-                        mandatory
-                      >
-                        <v-radio
-                          label="男"
-                          value="2"
-                          color="#666666"
-                          class="sex-option"
-                        ></v-radio>
-                        <v-radio
-                          label="女"
-                          value="1"
-                          color="#666666"
-                          class="sex-option"
-                        ></v-radio>
+                      <v-radio-group v-model="sex" row class="sex list-firstline-item" mandatory>
+                        <v-radio label="男" value="2" color="#666666" class="sex-option"></v-radio>
+                        <v-radio label="女" value="1" color="#666666" class="sex-option"></v-radio>
                       </v-radio-group>
                     </v-list-item>
                     <v-list-item class="list group_xs">
-                      <v-select
-                        label="组别"
-                        :items="groups"
-                        :rules="groupRules"
-                        item-text="name"
-                        item-value="index"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input "
-                        v-model="group"
-                        color="rgb(111,111,111)"
-                      ></v-select>
+                      <v-select label="组别" :items="groups" :rules="groupRules" item-text="name" item-value="index"
+                        single-line solo flat background-color="#F3F3F3" dense class="input " v-model="group"
+                        color="rgb(111,111,111)"></v-select>
                     </v-list-item>
                     <v-list-item class="list">
-                      <v-text-field
-                        v-model="phone"
-                        :rules="phoneRules"
-                        label="电话"
-                        placeholder="电话"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input"
-                        clearable
-                        color="rgb(111,111,111)"
-                      ></v-text-field>
+                      <v-text-field v-model="phone" :rules="phoneRules" label="电话" placeholder="电话" single-line solo flat
+                        background-color="#F3F3F3" dense class="input" clearable color="rgb(111,111,111)"></v-text-field>
                     </v-list-item>
                     <v-list-item class="list">
-                      <v-text-field
-                        v-model="qq"
-                        :rules="qqRules"
-                        label="QQ"
-                        placeholder="QQ"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input"
-                        clearable
-                        color="rgb(111,111,111)"
-                      ></v-text-field>
+                      <v-text-field v-model="qq" :rules="qqRules" label="QQ" placeholder="QQ" single-line solo flat
+                        background-color="#F3F3F3" dense class="input" clearable color="rgb(111,111,111)"></v-text-field>
                     </v-list-item>
                     <v-list-item class="list">
-                      <v-select
-                        v-model="grade"
-                        label="年级"
-                        :items="grades"
-                        item-text="name"
-                        item-value="index"
-                        :rules="gradeRules"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input"
-                        color="rgb(111,111,111)"
-                      ></v-select>
+                      <v-select v-model="grade" label="年级" :items="grades" item-text="name" item-value="index"
+                        :rules="gradeRules" single-line solo flat background-color="#F3F3F3" dense class="input"
+                        color="rgb(111,111,111)"></v-select>
                     </v-list-item>
                     <v-list-item class="list">
-                      <v-text-field
-                        v-model="major"
-                        :rules="majorRules"
-                        label="专业"
-                        placeholder="专业"
-                        single-line
-                        solo
-                        flat
-                        background-color="#F3F3F3"
-                        dense
-                        class="input"
-                        clearable
-                        color="rgb(111,111,111)"
-                      ></v-text-field>
+                      <v-text-field v-model="major" :rules="majorRules" label="专业" placeholder="专业" single-line solo flat
+                        background-color="#F3F3F3" dense class="input" clearable color="rgb(111,111,111)"></v-text-field>
                     </v-list-item>
                   </v-list>
                 </div>
                 <div class="sign-up_right">
-                  <v-file-input
-                    :label="
-                      $vuetify.breakpoint.xs ? '简历' : '点击此处上传简历'
-                    "
-                    solo
-                    flat
-                    background-color="#F3F3F3"
-                    height="162"
-                    :rules="resumeRules"
-                    v-model="resume"
-                    color="rgb(111,111,111)"
-                    prepend-icon=""
-                    class="file-input"
-                  ></v-file-input>
-                  <v-file-input
-                    :label="
-                      $vuetify.breakpoint.xs
-                        ? '作品集（非必填）'
-                        : '点击此处上传作品集（非必填）'
-                    "
-                    solo
-                    flat
-                    background-color="#F3F3F3"
-                    height="162"
-                    v-model="work"
-                    color="rgb(111,111,111)"
-                    prepend-icon=""
-                    class="file-input"
-                  ></v-file-input>
-                  <v-btn
-                    color="#333333"
-                    class="sign-up_submit"
-                    :loading="loading"
-                    :disabled="loading"
-                    @click="validateField"
-                    width="90"
-                    height="32"
-                  >
+                  <v-file-input :label="$vuetify.breakpoint.xs ? '简历' : '点击此处上传简历'
+                    " solo flat background-color="#F3F3F3" height="162" :rules="resumeRules" v-model="resume"
+                    color="rgb(111,111,111)" prepend-icon="" class="file-input"></v-file-input>
+                  <v-file-input :label="$vuetify.breakpoint.xs
+                    ? '作品集（非必填）'
+                    : '点击此处上传作品集（非必填）'
+                    " solo flat background-color="#F3F3F3" height="162" v-model="work" color="rgb(111,111,111)"
+                    prepend-icon="" class="file-input"></v-file-input>
+                  <v-btn color="#333333" class="sign-up_submit" :loading="loading" :disabled="loading"
+                    @click="validateField" width="90" height="32">
                     提交
                     <img src="~assets/img/home/Shape.png" alt="" srcset="" />
                   </v-btn>
@@ -220,9 +94,9 @@
 import Bottom from "../components/Bottom.vue";
 import { sendForm } from "@/api/sendForm";
 import { getUploadToken } from "@/api/qiniu";
-const OSS = require("ali-oss")
+//const OSS = require("ali-oss")
 // const qiniu = require("qiniu-js")
-
+import ObsClient from "esdk-obs-browserjs";
 export default {
   components: { Bottom },
   name: "Home",
@@ -243,7 +117,7 @@ export default {
         { index: 5, name: "后端", disabled: false },
         { index: 6, name: "移动", disabled: false },
         { index: 7, name: "游戏", disabled: false },
-        { index: 8, name: "Lab", disabled: false},
+        { index: 8, name: "Lab", disabled: false },
       ],
       groupRules: [(v) => !!v || "组别不能为空哦"],
       phone: "",
@@ -310,28 +184,46 @@ export default {
         formData.append("major", this.major);
         formData.append("group", this.group);
         // const token1 = (await tp1).token;
-        const client = new OSS({
-          // yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
-          region: 'oss-cn-beijing',
-          // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
-          accessKeyId: credentials.AccessKeyId,
-          accessKeySecret: credentials.AccessKeySecret,
-          // 从STS服务获取的安全令牌（SecurityToken）。
-          stsToken: credentials.SecurityToken,
-          refreshSTSToken: async () => {
-            // 向您搭建的STS服务获取临时访问凭证。
-            const info = await getUploadToken()
-            return {
-              accessKeyId: info.credentials.accessKeyId,
-              accessKeySecret: info.credentials.accessKeySecret,
-              stsToken: info.credentials.stsToken
-            }
-          },
-          // 刷新临时访问凭证的时间间隔，单位为毫秒。
-          refreshSTSTokenInterval: 600000,
-          // 填写Bucket名称。
-          bucket: 'pivotstudio'
+        // const client = new OSS({
+        //   // yourRegion填写Bucket所在地域。以华东1（杭州）为例，Region填写为oss-cn-hangzhou。
+        //   region: 'oss-cn-beijing',
+        //   // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+        //   accessKeyId: credentials.AccessKeyId,
+        //   accessKeySecret: credentials.AccessKeySecret,
+        //   // 从STS服务获取的安全令牌（SecurityToken）。
+        //   stsToken: credentials.SecurityToken,
+        //   refreshSTSToken: async () => {
+        //     // 向您搭建的STS服务获取临时访问凭证。
+        //     const info = await getUploadToken()
+        //     return {
+        //       accessKeyId: info.credentials.accessKeyId,
+        //       accessKeySecret: info.credentials.accessKeySecret,
+        //       stsToken: info.credentials.stsToken
+        //     }
+        //   },
+        //   // 刷新临时访问凭证的时间间隔，单位为毫秒。
+        //   refreshSTSTokenInterval: 600000,
+        //   // 填写Bucket名称。
+        //   bucket: 'pivotstudio'
+        // });
+        // 未引入AMD，直接通过构造函数创建ObsClient实例
+        var obsClient = new ObsClient({
+          access_key_id: credentials.access,
+          secret_access_key: credentials.secret,
+          security_token: credentials.securitytoken,
+          server: "https://obs.cn-southwest-2.myhuaweicloud.com"
         });
+        // var obsClient = new ObsClient({
+        //   access_key_id: "72IQD7PSXE68LTX1ZD0G",
+        //   secret_access_key: "jcy5vXOUPEK0n0OIMhctA910Nb9l8MqvQnbsOI88",
+
+        //   security_token: "gQ5jbi1zb3V0aHdlc3QtMo73CLSvwWdG3MwCISaCOFUBHm8rgRaRQJWyL2SYtwhyp32wsDl9nr-mCa4YJZCjbDv7v-zE7ruR6WKOn-ZOHr9ZOBK3BUcvMsrUDem4mq2oOyJH_CaSZm6FHQNGjJNqTkANB0DWEXPRAqPBRpdnYFiZI7iqO8RaGm_0-IccI68J0xToanfcFqYPI4ZPnE4FSmZfRdwzYdKualmkgmvquv_EfDbdXpDX6wQOX-0DWpUdu8vxrFNJ9Et2-tHRpQ4lsj1U7EBJA4gOc-lr1IXg0PPuPIZ57ZujC2mvyD-lAp1DQeznAiGSi_M1oWCYZUjuI6Bu3jVK8TvKe0-H0IGDkBv1f-2F1_xTtTevmw_ma39Z5fNia15X7enKSiJjz2hKBi8R9wPTR7UjYORPRHzExRUsuogZztO0Da926vMJ-iWIZIyVtSxobB_BMT9z7rXrWsdAXROIGXIi7GqhX0CrI47VH8L8WTNUVxcWTQZBIqG9Tj5dpfhGR6_ALAGLVqPMj1I1K72fAPRasPgWjfK2BCNE4MfeU0lUErbDIrBSEhy9mEUIAS46i-_wgDTQtWOJqA8B-rIDZWHdt6xCDA5rcB0LGNJHSTKXvf_JM137UGfDfp58CDj6-ox_fsxZnPigsQ1kcTGhe4xjoh602c8OTCedrSwR10Xz5b-vYrNdvuuFWOGjTd6YH9--I_nnZhLQ--M8FUMTfe3MxvXezdcVIqW-atTINaQE_bwer1qF6Hptp1qspV48BSI2xwDe46BMi7D2gVmBJ6LmCTCoSu3IeFgLsEkZ7c5MepCgStQq7ixhQw=="
+
+        //   ,
+        //   server: "https://obs.cn-southwest-2.myhuaweicloud.com"
+        // });
+        // 使用访问OBS
+
         const rel = this.resume.name.split(".");
         const rekey =
           new Date().getTime().toString() +
@@ -350,11 +242,22 @@ export default {
           // 填写Object完整路径。Object完整路径中不能包含Bucket名称。
           // 您可以通过自定义文件名（例如exampleobject.txt）或文件完整路径（例如exampledir/exampleobject.txt）的形式实现将数据上传到当前Bucket或Bucket中的指定目录。
           // data对象可以自定义为file对象、Blob数据或者OSS Buffer。
-          const result = await client.put(
-              "hrsystem/upload/" +
-              rekey,
-              this.resume
-          );
+          const result = await obsClient.putObject({
+            Bucket: 'pivotstudio',
+            Key: "hrsystem/upload/" + rekey,
+            SourceFile: this.resume
+          }, function (err, result) {
+            if (err) {
+              console.error('Error-->' + err);
+            } else {
+              console.log('Status-->' + result.CommonMsg.Status);
+            }
+          });
+          // const result = await client.put(
+          //   "hrsystem/upload/" +
+          //   rekey,
+          //   this.resume
+          // );
           formData.append("resume_key", rekey);
           console.log(result);
         } catch (e) {
@@ -377,24 +280,30 @@ export default {
         // const token2 = (await tp2).token;
         if (this.work) {
           const workkey =
-              new Date().getTime().toString() +
-              this.phone +
-              "/" +
-              this.group +
-              "/" +
-              this.name.split(" ").join("-") +
-              "-" +
-              this.work.name.split(" ").join("-");
+            new Date().getTime().toString() +
+            this.phone +
+            "/" +
+            this.group +
+            "/" +
+            this.name.split(" ").join("-") +
+            "-" +
+            this.work.name.split(" ").join("-");
           formData.append("work_key", workkey);
           try {
             // 填写Object完整路径。Object完整路径中不能包含Bucket名称。
             // 您可以通过自定义文件名（例如exampleobject.txt）或文件完整路径（例如exampledir/exampleobject.txt）的形式实现将数据上传到当前Bucket或Bucket中的指定目录。
             // data对象可以自定义为file对象、Blob数据或者OSS Buffer。
-            const result = await client.put(
-                "hrsystem/upload/" +
-                workkey,
-                this.work
-            );
+            const result = await obsClient.putObject({
+              Bucket: 'pivotstudio',
+              Key: "hrsystem/upload/" + rekey,
+              SourceFile: this.resume
+            }, function (err, result) {
+              if (err) {
+                console.error('Error-->' + err);
+              } else {
+                console.log('Status-->' + result.CommonMsg.Status);
+              }
+            });
             console.log(result);
             formData.append("work_key", workkey);
           } catch (e) {
@@ -402,19 +311,19 @@ export default {
             console.log(e);
           }
         }
-          // const ob2 = qiniu.upload(this.work, workkey, token2);
-          // await new Promise((re, rj) => {
-          //   ob2.subscribe(
-          //     null,
-          //     (err) => {
-          //       alert("文件上传失败");
-          //       rj(err);
-          //     },
-          //     (res) => {
-          //       re(res);
-          //     }
-          //   );
-          // });
+        // const ob2 = qiniu.upload(this.work, workkey, token2);
+        // await new Promise((re, rj) => {
+        //   ob2.subscribe(
+        //     null,
+        //     (err) => {
+        //       alert("文件上传失败");
+        //       rj(err);
+        //     },
+        //     (res) => {
+        //       re(res);
+        //     }
+        //   );
+        // });
         sendForm(formData)
           .then((res) => {
             this.loading = false;
@@ -441,12 +350,12 @@ export default {
         rect.top >= 0 &&
         rect.left >= 0 &&
         rect.bottom <=
-          (window.innerHeight ||
-            document.documentElement
-              .clientHeight) /* or $(window).height() */ &&
+        (window.innerHeight ||
+          document.documentElement
+            .clientHeight) /* or $(window).height() */ &&
         rect.right <=
-          (window.innerWidth ||
-            document.documentElement.clientWidth) /* or $(window).width() */
+        (window.innerWidth ||
+          document.documentElement.clientWidth) /* or $(window).width() */
       );
     };
     var lastScrollTop = 0;
@@ -485,16 +394,17 @@ export default {
           // }
         }
         lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-      } catch (error) {}
+      } catch (error) { }
     });
   },
 };
 </script>
 
 <style scoped>
-::v-deep div.v-input__slot > div.v-text-field__slot {
+::v-deep div.v-input__slot>div.v-text-field__slot {
   height: 100% !important;
 }
+
 ::v-deep .sex.v-input .v-label {
   font-family: Segoe UI;
   font-style: normal;
@@ -503,12 +413,15 @@ export default {
   line-height: 12px;
   color: #2c2c2c;
 }
+
 ::v-deep .v-messages__message {
   line-height: 14px !important;
 }
+
 ::v-deep .v-application--wrap {
   min-height: 0;
 }
+
 .time,
 .sign-up_header {
   cursor: default;
@@ -517,6 +430,7 @@ export default {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
 .join_font,
 .list,
 .sign-up_right {
@@ -525,6 +439,7 @@ export default {
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
 .main {
   position: relative;
   width: 100%;
@@ -534,6 +449,7 @@ export default {
   background-size: auto 100%;
   background-position: center;
 }
+
 .join {
   position: absolute;
   top: 68%;
@@ -544,6 +460,7 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
+
 .join_btn {
   position: relative;
   top: -5px;
@@ -560,17 +477,21 @@ export default {
 .join_icon {
   z-index: 1000;
 }
+
 @keyframes move {
   0% {
     transform: translateY(10px);
   }
+
   50% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(10px);
   }
 }
+
 .join_btn::before {
   content: "";
   position: absolute;
@@ -583,6 +504,7 @@ export default {
   z-index: 900;
   transition: 2s;
 }
+
 .join_btn::after {
   content: "";
   position: absolute;
@@ -595,57 +517,69 @@ export default {
   z-index: 1;
   animation: light 2s linear infinite;
 }
+
 .join_btn:hover::before {
   background: lightgray;
   box-shadow: 0 0 20px aqua;
 }
+
 .join_btn:hover::after {
   animation: none;
 }
+
 @keyframes light {
   0% {
     transform: rotate(0);
     filter: hue-rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
     filter: hue-rotate(360deg);
   }
 }
+
 .join_font {
   color: white;
   font: normal 700 36px "Source Han Serif TC";
   outline: none;
   line-height: 64px;
 }
+
 .register {
   height: 720px;
   background: white;
   position: relative;
 }
+
 .sign-up {
   width: 80%;
   margin: 0 auto;
   padding-top: 10vh;
 }
+
 .sign-up_header {
   font: normal 400 24px "Source Han Serif TC";
   color: #8d8d8d;
   margin-left: 5px;
   margin-bottom: 30px;
 }
+
 .sign-up_form {
   width: 100%;
 }
+
 .sign-up_left {
   float: left;
   width: 45%;
 }
+
 .sign-up_right {
   padding-top: 10px;
   float: right;
   width: 45%;
 }
+
 .list {
   padding-left: 0;
 }
@@ -653,16 +587,20 @@ export default {
 .group {
   min-width: 110px;
 }
+
 .group_xs {
   display: none;
 }
+
 .sex {
   padding-left: 10%;
   min-width: 190px;
 }
+
 .sex-option {
   margin-top: -20px;
 }
+
 .sex-tip,
 .group-tip {
   background-color: #f3f3f3;
@@ -676,6 +614,7 @@ export default {
   margin-right: 30px;
   color: #7a7a6a;
 }
+
 .sign-up_submit {
   float: right;
   margin-top: 17px;
@@ -685,38 +624,48 @@ export default {
   font-size: 14px;
   color: #f3f3f3;
 }
+
 .sign-up_submit img {
   margin-left: 15px;
 }
+
 @media screen and (max-width: 767px) {
   .sign-up_left {
     width: 50%;
   }
+
   .sex-tip {
     display: none;
   }
+
   .group_xs {
     display: block;
   }
+
   .group {
     display: none !important;
   }
+
   .join {
     left: 5%;
     width: 190px;
   }
+
   .time {
     left: 5%;
     font-size: 24px;
     line-height: 32px;
   }
+
   .join_font {
     font-size: 28px;
   }
+
   .join_btn {
     width: 40px;
     height: 40px;
   }
+
   .join_icon {
     font-size: 24px !important;
   }
