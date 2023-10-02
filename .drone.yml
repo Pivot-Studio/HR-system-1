@@ -44,7 +44,7 @@ steps:
         - build-${DRONE_BUILD_NUMBER}
     when:
       branch:
-        - main
+        - master
       event:
         - push
   - name: comment
