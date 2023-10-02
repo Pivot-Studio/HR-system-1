@@ -213,11 +213,7 @@ export default {
           security_token: credentials.securitytoken,
           server: "https://obs.cn-southwest-2.myhuaweicloud.com"
         });
-        // var obsClient = new ObsClient({
-        //   access_key_id: "72IQD7PSXE68LTX1ZD0G",
-        //   secret_access_key: "jcy5vXOUPEK0n0OIMhctA910Nb9l8MqvQnbsOI88",
 
-        //   security_token: "gQ5jbi1zb3V0aHdlc3QtMo73CLSvwWdG3MwCISaCOFUBHm8rgRaRQJWyL2SYtwhyp32wsDl9nr-mCa4YJZCjbDv7v-zE7ruR6WKOn-ZOHr9ZOBK3BUcvMsrUDem4mq2oOyJH_CaSZm6FHQNGjJNqTkANB0DWEXPRAqPBRpdnYFiZI7iqO8RaGm_0-IccI68J0xToanfcFqYPI4ZPnE4FSmZfRdwzYdKualmkgmvquv_EfDbdXpDX6wQOX-0DWpUdu8vxrFNJ9Et2-tHRpQ4lsj1U7EBJA4gOc-lr1IXg0PPuPIZ57ZujC2mvyD-lAp1DQeznAiGSi_M1oWCYZUjuI6Bu3jVK8TvKe0-H0IGDkBv1f-2F1_xTtTevmw_ma39Z5fNia15X7enKSiJjz2hKBi8R9wPTR7UjYORPRHzExRUsuogZztO0Da926vMJ-iWIZIyVtSxobB_BMT9z7rXrWsdAXROIGXIi7GqhX0CrI47VH8L8WTNUVxcWTQZBIqG9Tj5dpfhGR6_ALAGLVqPMj1I1K72fAPRasPgWjfK2BCNE4MfeU0lUErbDIrBSEhy9mEUIAS46i-_wgDTQtWOJqA8B-rIDZWHdt6xCDA5rcB0LGNJHSTKXvf_JM137UGfDfp58CDj6-ox_fsxZnPigsQ1kcTGhe4xjoh602c8OTCedrSwR10Xz5b-vYrNdvuuFWOGjTd6YH9--I_nnZhLQ--M8FUMTfe3MxvXezdcVIqW-atTINaQE_bwer1qF6Hptp1qspV48BSI2xwDe46BMi7D2gVmBJ6LmCTCoSu3IeFgLsEkZ7c5MepCgStQq7ixhQw=="
 
         //   ,
         //   server: "https://obs.cn-southwest-2.myhuaweicloud.com"
