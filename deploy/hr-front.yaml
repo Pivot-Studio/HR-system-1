@@ -2,16 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: hr-front
-  name: hr-front
-  namespace: pivothr
+    app: web-home-front
+  name: web-home-front
+  namespace: web-home
 spec:
   ports:
     - name: "8110"
       port: 8110
       targetPort: 8110
   selector:
-    app: hr-front
+    app: web-home-front
 status:
   loadBalancer: {}
 
@@ -20,26 +20,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: hr-front
-  name: hr-front
-  namespace: pivothr
+    app: web-home-front
+  name: web-home-front
+  namespace: web-home
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hr-front
+      app: web-home-front
   strategy:
     type: RollingUpdate
   template:
     metadata:
 
       labels:
-        app: hr-front
+        app: web-home-front
     spec:
       priorityClassName: high-priority
+      imagePullSecrets:
+      - name: harbor-config
       containers:
-      - image:  harbor.pivotstudio.cn/pivothr/hrfront:{{.build_tag}}
-        name: hr-front
+      - image:  harbor.pivotstudio.cn/hr-system/hr-front:{{.build_tag}}
+        name: web-home-front
         ports:
           - containerPort: 8110
         resources:
@@ -55,13 +57,13 @@ status: {}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: hr-front
-  namespace: pivothr
+  name: web-home-front
+  namespace: web-home
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: hr-front
+    name: web-home-front
   minReplicas: 1
   maxReplicas: 5
   metrics:
