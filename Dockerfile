@@ -1,5 +1,5 @@
 
-FROM node:16.5 AS front
+FROM node:14.21.3 AS front
 WORKDIR /home/hr
 COPY . .
 RUN npm install
