@@ -81,7 +81,7 @@ steps:
         from_secret: kube_config
     when:
       branch:
-        - main
+        - master
       event:
         - push
   - name: failed notification
