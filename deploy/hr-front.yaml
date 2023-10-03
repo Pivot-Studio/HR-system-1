@@ -54,7 +54,7 @@ spec:
       restartPolicy: Always
 status: {}
 ---
-apiVersion: apps/v1
+apiVersion:  autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-home-front
